@@ -1,0 +1,29 @@
+[data_loading]
+  streams = ["BrainVision RDA", "BrainVision RDA Markers", "MovingDotsMarkerStream", "RestParadigmMarkerStream"]   # either list or "all", if not specified, all streams will be loaded
+
+# Stream specific parameters
+[data_loading."BrainVision RDA"]
+  ignore_chs = ["MkIdx"] # list of channels to ignore, use black list as we usually want to check all or almost all channels
+  t_crop_pre_s = 10
+  t_crop_post_s = 10
+
+[two_hertz]
+  stream = "BrainVision RDA"
+  highpass = 1
+  lowpass = 1000
+  sfreq = 5000
+  tcrop_start_s = 10
+  tcrop_end_s = 5  # number of seconds crop from the end of the recording
+[two_hertz.epoching]
+  tmin=-0.2
+  tmax=0.5
+[two_hertz.peak_identification]
+  check_channels = ['FC1']
+  height_uV = 50
+  distance_ms = 400
+
+[plotting."BrainVision RDA"]
+  markers = ["RestParadigmMarkerStream", "MovingDotsMarkerStream"]
+
+
+
